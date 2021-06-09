@@ -28,7 +28,7 @@ if (!empty($_GET['action']))
                                     {
                                         $_SESSION['cart_item'][$key]['quantity'] = 0;
                                     }
-                                    $_SESSION['cart_item'][$key]['quantity'] += $_POST['quantity'];
+                                    $_SESSION['cart_item'][$key]['quantity'] = $_POST['quantity'];
                                 }
                             }
                         }
