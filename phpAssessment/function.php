@@ -9,7 +9,7 @@ function pagination()
     $resultArr=[];
     array_push($resultArr,...$result);
     $number_of_results = mysqli_num_rows($result);
-    $number_of_pages = ceil($number_of_results / $results_per_page);
+    $number_of_pages = $number_of_results / $results_per_page;
     $page = 1;
 
 if (isset($_GET['page'])) {
