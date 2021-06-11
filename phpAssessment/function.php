@@ -6,25 +6,22 @@ function pagination()
     $results_per_page = 5;
     $query = 'SELECT * FROM products';
     $result = mysqli_query($connection, $query);
+    $resultArr=[];
+    array_push($resultArr,...$result);
     $number_of_results = mysqli_num_rows($result);
     $number_of_pages = ceil($number_of_results / $results_per_page);
-    if (!isset($_GET['page']))
-    {
-        $page = 1;
-    }
-    else
-    {
-        $page = $_GET['page'];
-    }
-    $this_page_first_result = ($page - 1) * $results_per_page;
-    $query = 'SELECT * FROM products LIMIT ' . $this_page_first_result . ',' . $results_per_page;
-    $result = mysqli_query($connection, $query);
+    $page = 1;
 
-    while ($row = mysqli_fetch_array($result))
+if (isset($_GET['page'])) {
+	$page = $_GET['page'];
+}
+    $this_page_first_result = ($page - 1) * $results_per_page;
+    $resultArr = array_slice($resultArr, $this_page_first_result, $results_per_page);
+    foreach($resultArr as $row)
     { ?>
       <form action="index.php?action=Add&Id=<?=$row['Id']; ?>" method="post">
           <tr>
-                  <td id="product-image"><img src="<?php echo $row["image"]; ?>" width="100" height="100"></td>
+                  <td id="product-image"><img src="<?php echo $row["image"]; ?>"width="100" height="100"> </td>
                   <td><?=$row['Name']; ?></td>
                   <td><?php echo $row['Sku']; ?></td>
                   <td>₹<?=number_format($row['Price'], 2); ?></td>
