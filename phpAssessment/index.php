@@ -1,4 +1,4 @@
-<?php include 'Db.php'; ?>
+
 <?php include "function.php"; ?>
 <?php
 session_start();
@@ -9,6 +9,7 @@ if (!empty($_GET['action']))
         case 'Add':
             if (!empty($_POST['quantity']))
             {
+
                 $id = $_GET['Id'];
                 $query = "SELECT * FROM products WHERE Id=" . $id;
                 $result = mysqli_query($connection, $query);
@@ -28,7 +29,7 @@ if (!empty($_GET['action']))
                                     {
                                         $_SESSION['cart_item'][$key]['quantity'] = 0;
                                     }
-                                    $_SESSION['cart_item'][$key]['quantity'] = $_POST['quantity'];
+                                    $_SESSION['cart_item'][$key]['quantity'] += $_POST['quantity'];
                                 }
                             }
                         }
@@ -98,6 +99,8 @@ if (!empty($_GET['action']))
                 <th class="text-center">Remove</th>
             </tr>
             <?php
+            $total_quantity=0;
+            $total_Price=0;
 if (isset($_SESSION['cart_item']) && !empty($_SESSION['cart_item']))
 {
     foreach ($_SESSION['cart_item'] as $item)
@@ -119,6 +122,7 @@ if (isset($_SESSION['cart_item']) && !empty($_SESSION['cart_item']))
                     </tr>
 
                     <?php
+        
         $total_quantity += $item["quantity"];
         $total_Price += ($item["Price"] * $item["quantity"]);
     }
