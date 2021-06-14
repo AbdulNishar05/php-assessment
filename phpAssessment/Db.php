@@ -1,14 +1,6 @@
 <?php
 try {
-  if($connection = mysqli_connect("localhost", "root", "Admin@123", "plp"))
-  {
-    
-  }
-    
-else
-    {
-        throw new Exception('Unable to connect');
-    }
+  ($connection = mysqli_connect("localhost", "root", "Admin@123", "plp");
 }    
 catch(Exception $e)
 {
