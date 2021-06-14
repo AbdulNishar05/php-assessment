@@ -1,6 +1,6 @@
 <?php
 try {
-  ($connection = mysqli_connect("localhost", "root", "Admin@123", "plp");
+  $connection = mysqli_connect("localhost", "root", "Admin@123", "plp");
 }    
 catch(Exception $e)
 {
